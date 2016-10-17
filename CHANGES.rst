@@ -12,7 +12,7 @@ The current role maintainer_ is ganto_.
 
 
 debops-contrib.kibana v0.1.0 - unreleased
-----------------------------------------
+-----------------------------------------
 
 Added
 ~~~~~

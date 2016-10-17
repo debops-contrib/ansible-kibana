@@ -72,7 +72,7 @@ kibana__config_path: '/opt/kibana/config'
 
 # .. envvar:: kibana__service_configuration [[[
 #
-# Configuration values which should be set in :path:`kibana.yml`
+# Configuration values which should be set in :file:`kibana.yml`
 kibana__service_configuration: {}
                                                                    # ]]]
                                                                    # ]]]
