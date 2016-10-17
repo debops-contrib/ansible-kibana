@@ -1,8 +1,7 @@
 ---
 
 - name: Manage Kibana analytics and visualization platform
-  #  hosts: [ 'debops_service_kibana' ]
-  hosts: all
+  hosts: [ 'debops_service_kibana' ]
   become: True
 
   environment: '{{ inventory__environment | d({})
@@ -11,5 +10,5 @@
 
   roles:
 
-    - role: debops_contrib.kibana
+    - role: debops-contrib.kibana
       tags: [ 'role::kibana' ]
