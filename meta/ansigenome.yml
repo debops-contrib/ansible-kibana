@@ -1,0 +1,25 @@
+---
+
+ansigenome_info:
+  galaxy_url: 'https://galaxy.ansible.com/debops-contrib/kibana'
+  github_url: 'https://github.com/debops-contrib/ansible-kibana'
+  git_branch: 'master'
+
+  travis: True
+
+  license_url: 'https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)'
+
+  authors:
+
+    - name:  'Reto Gantenbein'
+      email: 'reto.gantenbein@linuxmonk.ch'
+      github: 'ganto'
+
+  synopsis: |
+    [Kibana](https://www.elastic.co/products/kibana/) is a data visualization
+    and analytics dashboard for [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+    It provides a Web interface on top of the content indexed on a
+    Elasticsearch cluster.
+
+    The `debops-contrib.kibana` role installs and configures the `kibana`
+    service.

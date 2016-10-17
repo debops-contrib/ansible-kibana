@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+{#
+{% for _key, _value in kibana__service_configuration.items() %}
+{{ _key }}: {{ _value | to_yaml }}
+{% endfor %}
+#}
+
+{% if kibana__service_configuration %}
+{{ kibana__service_configuration | to_nice_yaml }}
+{% endif %}

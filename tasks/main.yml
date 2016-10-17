@@ -1,0 +1,59 @@
+---
+
+- name: Add Kibana APT OpenGPG public key
+  apt_key:
+    id: '{{ kibana__apt_repo_key_id | replace(" ", "") }}'
+    keyserver: '{{ ansible_local.core.keyserver
+                if (ansible_local|d() and ansible_local.core|d() and
+                    ansible_local.core.keyserver|d())
+                else "hkp://pool.sks-keyservers.net" }}'
+    state: present
+  register: kibana__register_apt_key
+  when: kibana__apt_repo_key_id|d(False)
+  tags: [ 'role::kibana:repo' ]
+
+- name: Configure Kibana APT repository
+  template:
+    src: 'etc/apt/sources.list.d/debops_kibana.list.j2'
+    dest: '/etc/apt/sources.list.d/debops_kibana.list'
+    owner: 'root'
+    group: 'root'
+    mode: '0420'
+  register: kibana__register_apt_repository
+  when: kibana__apt_repo_source|d(False)
+  tags: [ 'role::kibana:repo' ]
+
+- name: Update APT repository cache
+  apt:
+    update_cache: True
+  when: kibana__register_apt_key|changed or kibana__register_apt_repository|changed
+  tags: [ 'role::kibana:repo' ]
+
+- name: Ensure specified packages are in there desired state
+  package:
+    name: '{{ item }}'
+    state: '{{ kibana__deploy_state|d("present") }}'
+  with_flattened: '{{ kibana__base_packages }}'
+  tags: [ 'role::kibana:pkts' ]
+
+- name: Divert original config
+  command: 'dpkg-divert --quiet --local --divert {{ kibana__config_path }}/kibana.yml.dpkg-divert --rename {{ kibana__config_path }}/kibana.yml'
+  args:
+    creates: '{{ kibana__config_path }}/kibana.yml.dpkg-divert'
+
+- name: Configure Kibana service
+  template:
+    src: 'opt/kibana/config/kibana.yml.j2'
+    dest: '{{ kibana__config_path }}/kibana.yml'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - Restart Kibana
+
+- name: Ensure Kibana service is in the desired state
+  service:
+    name: 'kibana'
+    state: 'started'
+    enabled: True
+  when: kibana__deploy_state in [ 'present', 'latest' ]

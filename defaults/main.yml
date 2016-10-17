@@ -1,0 +1,79 @@
+---
+# .. vim: foldmarker=[[[,]]]:foldmethod=marker
+
+# debops-contrib.kibana default variables [[[
+# ==========================================
+
+# .. contents:: Sections
+#    :local:
+#
+# .. include:: includes/all.rst
+
+
+# Basic configuration [[[
+# -----------------------
+
+# .. envvar:: kibana__version [[[
+#
+# Kibana software release version.
+kibana__version: '4.6'
+                                                                   # ]]]
+                                                                   # ]]]
+# Packages and installation [[[
+# -----------------------------
+
+# .. envvar:: kibana__base_packages [[[
+#
+# List of base packages to install.
+kibana__base_packages:
+  - 'kibana'
+
+                                                                   # ]]]
+# .. envvar:: kibana__deploy_state [[[
+#
+# What is the desired state which this role should achieve? Possible options:
+#
+# ``present``
+#   Default. Ensure that Kibana is installed and configured as requested.
+#
+# ``latest``
+#   Ensure that the Kibana packages are updated if newer versions are avilable
+#   in the APT repository.
+#
+# ``absent``
+#   Ensure that Kibana is uninstalled and it's configuration is removed.
+#
+kibana__deploy_state: 'present'
+
+                                                                   # ]]]
+# .. envvar:: kibana__apt_repo_source [[[
+#
+# APT ``source.list`` configuration string of the Kibana ``.deb.`` repository.
+# Set to ``False`` if the repository providing the Kibana packages is
+# configured through other means.
+kibana__apt_repo_source: 'deb https://packages.elastic.co/kibana/{{ kibana__version }}/debian stable main'
+
+                                                                   # ]]]
+# .. envvar:: kibana__apt_repo_key_id [[[
+#
+# Package signing GPG public key fingerprint. Set to ``False`` if the key is
+# provided through other means or the packages are not signed.
+kibana__apt_repo_key_id: '4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4'
+
+                                                                   # ]]]
+# .. envvar:: kibana__config_path [[[
+#
+# Path for storing configuration file.
+kibana__config_path: '/opt/kibana/config'
+                                                                   # ]]]
+                                                                   # ]]]
+# Service Configuration [[[
+# -------------------------
+
+# .. envvar:: kibana__service_configuration [[[
+#
+# Configuration values which should be set in :path:`kibana.yml`
+kibana__service_configuration: {}
+                                                                   # ]]]
+                                                                   # ]]]
+                                                                   # ]]]
