@@ -111,7 +111,8 @@ kibana__ferm__dependent_rules:
 
 # .. envvar:: kibana__service_configuration [[[
 #
-# Configuration values which should be set in :file:`kibana.yml`
+# Configuration values which should be set in :file:`kibana.yml`. For more
+# information see :ref:`kibana__ref_service_configuration`.
 kibana__service_configuration: {}
                                                                    # ]]]
                                                                    # ]]]

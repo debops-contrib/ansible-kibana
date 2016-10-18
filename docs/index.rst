@@ -9,6 +9,7 @@ Ansible role: debops-contrib.kibana
    introduction
    getting-started
    defaults
+   defaults-detailed
    copyright
    changelog
 
