@@ -2,7 +2,7 @@
 # .. vim: foldmarker=[[[,]]]:foldmethod=marker
 
 # debops-contrib.kibana default variables [[[
-# ==========================================
+# ===========================================
 
 # .. contents:: Sections
 #    :local:
@@ -67,7 +67,42 @@ kibana__apt_repo_key_id: '4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4'
 kibana__config_path: '/opt/kibana/config'
                                                                    # ]]]
                                                                    # ]]]
-# Service Configuration [[[
+# Network configuration [[[
+# -------------------------
+
+# .. envvar:: kibana__bind [[[
+#
+# IP address or hostname where the Kibana service will listen for connections.
+kibana__bind: '0.0.0.0'
+
+                                                                   # ]]]
+# .. envvar:: kibana__port [[[
+#
+# Network port of the Kibana service.
+kibana__port: 5601
+
+                                                                   # ]]]
+# .. envvar:: kibana__allow [[[
+#
+# List of IP addresses or CIDR subnets which will be allowed via
+# :command:`ip(6)tables` to connect to the Kibana service. If it's
+# empty, all remote connections are allowed.
+kibana__allow: []
+
+                                                                   # ]]]
+# .. envvar:: kibana__ferm__dependent_rules [[[
+#
+# Configuration for ``debops.ferm`` Ansible rule.
+kibana__ferm__dependent_rules:
+  - type: 'accept'
+    dport: [ '{{ kibana__port }}' ]
+    saddr: '{{ kibana__allow }}'
+    accept_any: True
+    weight: '50'
+    role: 'kibana'
+                                                                   # ]]]
+                                                                   # ]]]
+# Service configuration [[[
 # -------------------------
 
 # .. envvar:: kibana__service_configuration [[[
