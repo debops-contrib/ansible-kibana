@@ -79,7 +79,7 @@ kibana__bind: '0.0.0.0'
 # .. envvar:: kibana__port [[[
 #
 # Network port of the Kibana service.
-kibana__port: 5601
+kibana__port: '5601'
 
                                                                    # ]]]
 # .. envvar:: kibana__allow [[[
@@ -99,7 +99,11 @@ kibana__ferm__dependent_rules:
     saddr: '{{ kibana__allow }}'
     accept_any: True
     weight: '50'
-    role: 'kibana'
+    role: 'debops-contrib.kibana'
+    rule_state: '{{ "present"
+                    if kibana__deploy_state|d("present") != "absent"
+                    else "absent" }}'
+
                                                                    # ]]]
                                                                    # ]]]
 # Service configuration [[[
