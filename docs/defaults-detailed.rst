@@ -33,4 +33,10 @@ Customize the Elasticsearch HTTP URL to which Kibana should connect:
    kibana__service_configuration:
      elasticsearch.url: 'http://elastic01.example.com:9200'
 
+.. note::
 
+    Some server properties will be set implicitly according to the Ansible role
+    configuration. The following variables should be used instead:
+
+    - :envvar:`kibana__bind` for ``server.host``
+    - :envvar:`kibana__port` for ``server.port``
