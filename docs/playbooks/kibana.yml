@@ -10,5 +10,10 @@
 
   roles:
 
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm__dependent_rules:
+        - '{{ kibana__ferm__dependent_rules }}'
+
     - role: debops-contrib.kibana
       tags: [ 'role::kibana' ]
