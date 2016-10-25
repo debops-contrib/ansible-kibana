@@ -15,7 +15,8 @@
 
 # .. envvar:: kibana__version [[[
 #
-# Kibana software release version.
+# Kibana software release version. Check (and/or extend)
+# :envvar:`kibana__apt_repo_map` for the list of supported versions.
 kibana__version: '4.6'
                                                                    # ]]]
                                                                    # ]]]
@@ -46,12 +47,20 @@ kibana__base_packages:
 kibana__deploy_state: 'present'
 
                                                                    # ]]]
+# .. envvar:: kibana__apt_repo_map [[[
+#
+# Dictionary to lookup upstream repository URLs for a corresponding release.
+kibana__apt_repo_map:
+  '4.6': 'https://packages.elastic.co/kibana/{{ kibana__version }}/debian'
+  '5.0-pre': 'https://artifacts.elastic.co/packages/5.x-prerelease/apt'
+
+                                                                   # ]]]
 # .. envvar:: kibana__apt_repo_source [[[
 #
 # APT ``source.list`` configuration string of the Kibana ``.deb.`` repository.
 # Set to ``False`` if the repository providing the Kibana packages is
 # configured through other means.
-kibana__apt_repo_source: 'deb https://packages.elastic.co/kibana/{{ kibana__version }}/debian stable main'
+kibana__apt_repo_source: 'deb {{ kibana__apt_repo_map[kibana__version] }} stable main'
 
                                                                    # ]]]
 # .. envvar:: kibana__apt_repo_key_id [[[
