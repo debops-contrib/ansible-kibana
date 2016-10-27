@@ -17,7 +17,7 @@
 #
 # Kibana software release version. Check (and/or extend)
 # :envvar:`kibana__apt_repo_map` for the list of supported versions.
-kibana__version: '4.6'
+kibana__version: '5.x'
                                                                    # ]]]
                                                                    # ]]]
 # Packages and installation [[[
@@ -52,7 +52,7 @@ kibana__deploy_state: 'present'
 # Dictionary to lookup upstream repository URLs for a corresponding release.
 kibana__apt_repo_map:
   '4.6': 'https://packages.elastic.co/kibana/{{ kibana__version }}/debian'
-  '5.0-pre': 'https://artifacts.elastic.co/packages/5.x-prerelease/apt'
+  '5.x': 'https://artifacts.elastic.co/packages/{{ kibana__version }}/apt'
 
                                                                    # ]]]
 # .. envvar:: kibana__apt_repo_source [[[
@@ -70,10 +70,19 @@ kibana__apt_repo_source: 'deb {{ kibana__apt_repo_map[kibana__version] }} stable
 kibana__apt_repo_key_id: '4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4'
 
                                                                    # ]]]
+# .. envvar:: kibana__config_path_map [[[
+#
+# Dictionary to lookup the the configuration directory for a corresponding
+# release.
+kibana__config_path_map:
+  '4.6': '/opt/kibana/config'
+  '5.x': '/etc/kibana'
+
+                                                                   # ]]]
 # .. envvar:: kibana__config_path [[[
 #
 # Path for storing configuration file.
-kibana__config_path: '/opt/kibana/config'
+kibana__config_path: '{{ kibana__config_path_map[kibana__version] }}'
                                                                    # ]]]
                                                                    # ]]]
 # Network configuration [[[
@@ -112,7 +121,6 @@ kibana__ferm__dependent_rules:
     rule_state: '{{ "present"
                     if kibana__deploy_state|d("present") != "absent"
                     else "absent" }}'
-
                                                                    # ]]]
                                                                    # ]]]
 # Service configuration [[[
