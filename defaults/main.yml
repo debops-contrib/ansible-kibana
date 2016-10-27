@@ -70,10 +70,19 @@ kibana__apt_repo_source: 'deb {{ kibana__apt_repo_map[kibana__version] }} stable
 kibana__apt_repo_key_id: '4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4'
 
                                                                    # ]]]
+# .. envvar:: kibana__config_path_map [[[
+#
+# Dictionary to lookup the the configuration directory for a corresponding
+# release.
+kibana__config_path_map:
+  '4.6': '/opt/kibana/config'
+  '5.x': '/etc/kibana'
+
+                                                                   # ]]]
 # .. envvar:: kibana__config_path [[[
 #
 # Path for storing configuration file.
-kibana__config_path: '/opt/kibana/config'
+kibana__config_path: '{{ kibana__config_path_map[kibana__version] }}'
                                                                    # ]]]
                                                                    # ]]]
 # Network configuration [[[
