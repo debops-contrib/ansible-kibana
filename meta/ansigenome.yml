@@ -5,6 +5,10 @@ ansigenome_info:
   github_url: 'https://github.com/debops-contrib/ansible-kibana'
   git_branch: 'master'
 
+  status:
+    name: 'deprecated'
+    note: 'It has been superseded by [debops.kibana](https://github.com/debops/ansible-kibana).'
+
   travis: True
 
   license_url: 'https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)'

@@ -7,6 +7,11 @@
 [![test-suite](https://img.shields.io/badge/test--suite-ansible--kibana-blue.svg?style=flat)](https://github.com/ganto/debops-test-suite/tree/master/ansible-kibana/)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-debops--contrib.kibana-660198.svg?style=flat)](https://galaxy.ansible.com/debops-contrib/kibana)
 
+### Warning, this is a deprecated role
+
+It has been superseded by [debops.kibana](https://github.com/debops/ansible-kibana).
+
+***
 
 [Kibana](https://www.elastic.co/products/kibana/) is a data visualization
 and analytics dashboard for [Elasticsearch](https://www.elastic.co/products/elasticsearch)
